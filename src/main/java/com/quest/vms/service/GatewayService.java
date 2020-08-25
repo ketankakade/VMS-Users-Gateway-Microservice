@@ -16,4 +16,6 @@ public interface GatewayService {
 	
 	public GenericResponse<UserDTO> updateUser(UserDTO user);	
 	
+	public GenericResponse<UserDTO> searchUser(String userCategory, String userName); 
+	
 }

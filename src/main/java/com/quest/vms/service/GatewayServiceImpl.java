@@ -31,7 +31,9 @@ public class GatewayServiceImpl implements GatewayService {
 
 	@Value("${updateUserUrl}")
 	String updateUserUrl;
-
+	
+	@Value("${filterListUser}")
+	String filterListUser;
 	
 
 	private RestTemplate restTemplate;
@@ -103,6 +105,17 @@ public class GatewayServiceImpl implements GatewayService {
 			restTemplate.put(updateUserUrl, userDto);
 		}
 		return updatedUser;
+	}
+	
+	@Override
+	public GenericResponse<UserDTO> searchUser(String userCategory, String userName) {
+		Map<String, String> params = new HashMap<>();
+		params.put("userCategory", userCategory);
+		params.put("userName", userName);
+		@SuppressWarnings("unchecked")
+		GenericResponse<UserDTO> listUserGenericRes = restTemplate.getForObject(filterListUser,
+				GenericResponse.class, params);
+		return listUserGenericRes;
 	}
 	
 	}

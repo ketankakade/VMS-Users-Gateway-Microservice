@@ -101,6 +101,23 @@ public class GatewayController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
+	
+	@ApiOperation(value = "Get filtered users from system")
+	@GetMapping("/listUser")
+	public ResponseEntity<GenericResponse<UserDTO>> searchUser(
+			// approved or not
+			@RequestParam(value = "userCategory", required = false) String userCategory,
+			@RequestParam(value = "userName", required = false) String userName){
+		log.info("list user");
+		try {
+			GenericResponse<UserDTO> listUserGenericRes = gatewayService.searchUser(userCategory, userName);
+			return ResponseEntity.status(listUserGenericRes.getStatusCode()).body(listUserGenericRes);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
 
 	
 }

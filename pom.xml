@@ -9,8 +9,8 @@
 		<version>2.3.3.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.quest.vms</groupId>
-	<artifactId>com.quest.vms</artifactId>
+	<groupId>vms-user-gateway</groupId>
+	<artifactId>vms-user-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>VMS-Users-Gateway-Microservice</name>
 	<description>VMS Users Gateway Microservice</description>

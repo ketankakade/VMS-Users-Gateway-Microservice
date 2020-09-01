@@ -1,6 +1,10 @@
 package com.quest.vms.service;
 
+import javax.validation.Valid;
+
 import com.quest.vms.common.utils.GenericResponse;
+import com.quest.vms.dto.JwtResponse;
+import com.quest.vms.dto.LoginRequest;
 import com.quest.vms.dto.UserDTO;
 
 
@@ -16,6 +20,8 @@ public interface GatewayService {
 	
 	public GenericResponse<UserDTO> updateUser(UserDTO user);	
 	
-	public GenericResponse<UserDTO> searchUser(String userCategory, String userName); 
+	public GenericResponse<UserDTO> searchUser(String userCategory, String userName);
+
+	public GenericResponse<JwtResponse> authenticateUser(LoginRequest loginRequest); 
 	
 }

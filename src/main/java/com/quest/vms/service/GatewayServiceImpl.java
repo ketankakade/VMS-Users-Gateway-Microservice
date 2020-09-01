@@ -3,12 +3,16 @@ package com.quest.vms.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.quest.vms.common.utils.GenericResponse;
+import com.quest.vms.dto.JwtResponse;
+import com.quest.vms.dto.LoginRequest;
 import com.quest.vms.dto.UserDTO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +39,8 @@ public class GatewayServiceImpl implements GatewayService {
 	@Value("${filterListUser}")
 	String filterListUser;
 	
+	@Value("${authUserUrl}")
+	String authUserUrl;
 
 	private RestTemplate restTemplate;
 
@@ -116,6 +122,16 @@ public class GatewayServiceImpl implements GatewayService {
 		GenericResponse<UserDTO> listUserGenericRes = restTemplate.getForObject(filterListUser,
 				GenericResponse.class, params);
 		return listUserGenericRes;
+	}
+
+	@Override
+	public GenericResponse<JwtResponse> authenticateUser(LoginRequest loginRequest) {
+		// TODO Auto-generated method stub
+		log.info("GatewayServiceImpl :: authenticateUser ");
+		@SuppressWarnings("unchecked")
+		GenericResponse<JwtResponse> authUserGenericRes = restTemplate.postForObject(authUserUrl, loginRequest,
+				GenericResponse.class);
+		return authUserGenericRes;
 	}
 	
 	}
